@@ -18,7 +18,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 	<link rel="shortcut icon" type="x-icon" href="logo.png">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin| Closed Complaints</title>
+	<title>Admin| Report</title>
 	<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
@@ -36,6 +36,9 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 }
 
 </script>
+
+
+
 </head>
 <body>
 <?php include('include/header.php');?>
@@ -51,7 +54,10 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 	
 							<div class="module-head">
 								<h3>Report</h3>
-								<button id="downloadexcel" class="excel">Export to Excel</button> 
+								<button class="excel">export to excel</button>
+								<!-- <form name="export.php" method="post">
+									<input  name="export_excel" class="excel" value="export to excel" />
+                                </form> -->
 								
 							</div>
 							
@@ -59,7 +65,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 
                               
 							
-								<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display" >
+								<table  cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display" >
 									<thead>
 										<tr>
 											<th>Complaint No</th>
@@ -116,6 +122,15 @@ while($row=mysqli_fetch_array($query))
 			</div>
 		</div><!--/.container-->
 	</div><!--/.wrapper-->
+<script>
+	document.getElementById('downloadexcel').addEventListener('click', function() {
+		var table2excel = new Table2Excel();
+         table2excel.export(document.querySelectorAll("#example-table"));
+
+	});
+	</script>
+
+
 
 <?php include('include/footer.php');?>
 
