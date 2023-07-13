@@ -54,7 +54,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 	
 							<div class="module-head">
 								<h3>Report</h3>
-								<button class="excel">export to excel</button>
+							<a href="export.php"><button class="excel">export to excel</button></a>
 								<!-- <form name="export.php" method="post">
 									<input  name="export_excel" class="excel" value="export to excel" />
                                 </form> -->

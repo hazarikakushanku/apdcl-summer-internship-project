@@ -1,48 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+
+</head>
+
+<body>
+
 <?php
 
-$connect = mysqli_connect("localhost", "root", "", "cms");
-$output = '';
+require('include/config.php');
 
+$sql = " select * from tblcomplaints";
 
+$res = mysqli_query($con, $sql);
 
+$html='<table class="table tavle-striped table-hover table-bordered border-primary text-center"  >
 
+<tr>
 
-$query=mysqli_query($con,"select tblcomplaints.*,users.userconsumernumber as consumernumber from tblcomplaints join users on users.id=tblcomplaints.userId ");
-$result = mysqli_query($connect, $query);
-if (mysqli_num_rows ($result) > 0)
+<th style="width:100px">complaint number</th>
 
+<th style="width:100px">userid</th>
+
+<th style="width:100px">category</th>
+
+<th style="width:100px">complaintType</th>
+
+<th style="width:100px">Region</th>
+
+<th style="width:100px">ComplaintDetails</th>
+
+<th style="width:100px">status</th>
+
+</tr>';
+while($data=mysqli_fetch_assoc($res))
 {
-$output .='
-<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display" >
-<thead>
-    <tr>
-        <th>Complaint No</th>
-        <th>Consumer number</th>
-        <th>Division</th>
-        <th>Status</th>
-        
-        <th>Action</th>
-        
-    
-    </tr>
-</thead>
-<tbody>
-';
-while($row=mysqli_fetch_array($query))
-{ 
-    $output .=
-    
-    
-    
-    
-    $output .= '</table>';
+      $html.='<tr style="height:100px">
+      <td>'.$data['complaintnumber'].'</td>
+      <td>'.$data['userId'].'</td>
+      <td>'.$data['category'].'</td>
+      <td>'.$data['complaintType'].'</td>
+      <td>'.$data['Region'].'</td>
+      <td>'.$data['status'].'</td>
+      </tr>'
+}
+      $html.='</table>';
+      header('Content-Type:application/xls');
+      header('Content-Disposition:attatchment;filemane=report.xls');
+      echo $html;
 
-header ( "Content-Type: application/xls");
+?>
 
-header ("Content-Disposition: attachment; filename=download.xls");
+</table>
 
-echo $output;
+</body>
 
-                            
-                        }
-                        ?>
+</html>
